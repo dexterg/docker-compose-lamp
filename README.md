@@ -2,7 +2,7 @@
 Based on the Docker images, built to be fast, small and extendable LAMP stack.
 
 I made this lab for my students with a windows 10 family installed in their laptop.
-The most powerfull technology is docker to have strictly the same lab for us
+The most powerfull technology is docker to have strictly the same lab for us.
 But docker can't run on this OS.
 
 That's possible with this solution : a VirtualBox Linux VM with docker inside !
@@ -61,17 +61,17 @@ Install VirtualBox on your machine.
 ## Launch VirtualBox
 ### Create a new VM based on Alpine linux
 * Screen 1
-** Name: alpine2201
-** Type: Linux
-** Version: Other Linux (64-bit)
-** Mémory: 512 Mo
-** Hard disk: Create a virtual disk now
-** Press on « create » button
+  * Name: alpine2201
+  * Type: Linux
+  * Version: Other Linux (64-bit)
+  * Mémory: 512 Mo
+  * Hard disk: Create a virtual disk now
+  * Press on « create » button
 * Screen 2
-** HDD File type: VDI
-** File space: 8,00 Go
-** Physical HDD storage: Dynamic
-** Press on « create » button
+  * HDD File type: VDI
+  * File space: 8,00 Go
+  * Physical HDD storage: Dynamic
+  * Press on « create » button
 ### New VM configuration
 * Clic on the « Configuration » icône
 * Clic on the « Network » icône
