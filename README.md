@@ -1,6 +1,12 @@
 # Docker Compose LAMP stack
 Based on the Docker images, built to be fast, small and extendable LAMP stack.
 
+I made this lab for my students with a windows 10 family installed in their laptop.
+So, docker can't run on this OS and I want a unified stack for my classroomm...
+That's a possible solution : a Linux VirtualBox VM with docker inside !
+
+With virtualBox, this lab can run on Linux, MacOS or Windows machines.
+
 ## Stack
 * [PHP-FPM](https://github.com/a-kom/alpine-php_fpm)
 * [Apache2 with MPM mode](https://github.com/a-kom/alpine-apache)
@@ -40,6 +46,136 @@ The LAMP stack consists of the following containers:
 | PHP-FPM-DATA              | php-7, php-5       | php-fpm-data| [lordius/alpine-php_fpm]                     |   |
 | StandaloneFirefoxDebug    | 2.48.2             | selenium    | [selenium/standalone-firefox-debug]          |   |
 
+## Download requirements for VirtualBox solution
+Download [VirtualBox](https://www.virtualbox.org/wiki/Downloads) for your platform.
+Download [Alpine linux standard x86_64](https://https://alpinelinux.org/downloads/).
+### Windows
+Download [PuTTY](https://www.putty.org)
+### Linux
+### MacOS
+Nothing to download
+
+## Install requirements for VirtualBox solution
+Install VirtualBox on your machine.
+## Launch VirtualBox
+### Create a new VM based on Alpine linux
+* Screen 1
+** Name: alpine2201
+** Type: Linux
+** Version: Other Linux (64-bit)
+** Mémory: 512 Mo
+** Hard disk: Create a virtual disk now
+** Press on « create » button
+* Screen 2
+** HDD File type: VDI
+** File space: 8,00 Go
+** Physical HDD storage: Dynamic
+** Press on « create » button
+### New VM configuration
+* Clic on the « Configuration » icône
+* Clic on the « Network » icône
+** Network accès mode: NAT
+** Clic on the « Advenced »
+** Clic on the « Ports redirection »
+** Clic on the « + »
+** Name: ssh2201
+** Protocol: TCP
+** Host Ip: take empty
+** Host port: 2201
+** Guest Ip: 10.0.2.15
+** Guest port: 22
+** Clic on the « OK »
+* Clic on the « Storage » icône 
+* Clic on the storage unity: optic reader (left)
+* Clic on the CD/DVD icône (right)
+* Choice a virtual optical disk file
+** alpine-linux iso you have downloaded
+* Clic the on the « OK » button
+### Launch tne VM
+* Clic on the « Start » icône 
+### VM Install for frenchies
+* Localhost login: root (no password) and « enter »
+* Enter « setu » and « tabulation » and « ql » and « tabulation »
+* Keyboard layout: fr and « envoi »
+* Keyboard variant: fr-qwerty (fr-qwerty for the frenchies, it's a qwerty keyboard)
+* Hostname système: alpine2201
+* Network interface: « enter » (eth0)
+* Ip address: « enter » (dhcp)
+* Manual network configuration: « enter » (no)
+* New password: what you want but simple, it's a lab
+* Timezone: Europe and « envoi »
+* Sub-timezone: Paris and « envoi »
+* Proxy: « enter » (none)
+* Mirror number: « enter » (f to search best repository time response)
+* SSH server: « enter » (openssh)
+* NTP client: « enter » (chrony)
+* Disk to use: sda and « enter » (the VirtualBox HDD)
+* How would you like to use it: sys and « enter »
+* Erase the above disk: y and « enter »
+### Utilities install
+* Enter: apk add vim sudo nmap
+* Enter: apk adduser user1
+* Enter: visudo
+* Go to line 92 with arrows and press x when you are on the # to delete it
+* Go to line 93 with arrows la lettre x  Installation d’utilitaires
+* Enter: :wq (: is important)
+* Enter: reboot
+### Finalise
+* Go back VirtualBox GUI
+* Clic on Configuration
+* Clic on Storage
+* Clic on alpine iso file and on the CD icône at the right
+* Clic on « remove the disk from the virtual drive »
+* Clic on the « OK button »
+* Go back the VM console
+* Enter: reboot and press « return »
+
+## Remote handshake
+### Windows (PuTTY)
+* Port: 2201
+* Adresse: 10.0.2.15
+* User: user1 (created on alpine2201 VM)
+### Linux and MacOS
+* ssh -p 2201 user1@10.0.2.15
+
+## docker installation on the alpine VM
+* sudo vi /etc/apk/repositories
+* sudo apk update
+* sudo apk upgrade
+* sudo apk add php7 git docker py-pip
+* sudo adduser user1 docker
+* sudo rc-update add docker boot
+* sudo service docker start
+* sudo pip install docker-compose
+* sudo pip install --upgrade pip
+* docker --version
+* docker pull hello-world
+* git clone https://github.com/dexterg/docker-compose-lamp.git
+* cd docker-compose-lamp
+* docker-compose up
+
+## Port redirection on virtualBox for this VM
+* Clic on the « Configuration » icône
+* Clic on the « Network » icône
+** Network accès mode: NAT
+** Clic on the « Advenced »
+** Clic on the « Ports redirection »
+** Clic on the « + »
+** Put these rules:
+
+| Name        | Protocol | Host Ip | Host port | Guest Ip  | Guest port |
+| ----------- | -------- | ------- | --------- | --------- | ---------- |
+| ssh         | TCP      |         | 2201      | 10.0.2.15 | 22         |
+| apache      | TCP      |         | 8080      | 10.0.2.15 | 80         |
+| nginx       | TCP      |         | 8081      | 10.0.2.15 | 81         |
+| phpmyadmin  | TCP      |         | 8082      | 10.0.2.15 | 82         |
+| Adminer     | TCP      |         | 8083      | 10.0.2.15 | 83         |
+| ngrok       | TCP      |         | 8084      | 10.0.2.15 | 84         |
+| mailhog     | TCP      |         | 8085      | 10.0.2.15 | 85         |
+
+** Clic the on the « OK » button
+
+
 ## Requirements
 ### Linux
 
@@ -52,46 +188,32 @@ Install [Docker Toolbox](https://docs.docker.com/toolbox/overview).
 
 ##  Introduction
 ### Linux
-Run inside the folder with **docker-compose.yml**: `docker-compose up -d`
+Go to the alpine-linux VM with ssh (user1)
+Enter: git clone https://github.com/dexterg/docker-compose-lamp.git
+Enter: cd docker-compose-lamp
+Enter: docker-compose up -d
 
-To view the **PHP** info with the **Apache2 in MPM mode** use the IP: **http://172.55.0.3/info.php**.
+### Desktop
 
-To view the **PHP** info with the **NGINX** use the IP: **http://172.55.0.4/info.php**.
+| apache      | TCP      |         | 8080      | 10.0.2.15 | 80         |
+| nginx       | TCP      |         | 8081      | 10.0.2.15 | 81         |
+| phpmyadmin  | TCP      |         | 8082      | 10.0.2.15 | 82         |
+| Adminer     | TCP      |         | 8083      | 10.0.2.15 | 83         |
+| ngrok       | TCP      |         | 8084      | 10.0.2.15 | 84         |
+| mailhog     | TCP      |         | 8085      | 10.0.2.15 | 85         |
 
-**MailHog** is available under **http://172.55.0.6:8025**
+To view the **PHP** info with the **Apache2 in MPM mode** use the IP: **http://localhost:8080**.
 
-**NGROK** is available under **http://172.55.0.7:4040**
+To view the **PHP** info with the **NGINX** use the IP: **http://localhost:8081**.
 
-**PhpMyAdmin** is available under **http://172.55.0.9**
+**PhpMyAdmin** is available under **http://localhost:8082**
 
-You can edit your system host file for accessing containers via domain names by adding lines (or something like this based on your IP and domains, don't forget to change `extra_hosts` in `docker-compose.yml`):
+**Adminer** is available under **http://localhost:8083**
 
-`172.55.0.4 site.dockerlamp`
+**NGROK** is available under **http://localhost:8084**
 
-`172.55.0.6 mailhog.dockerlamp`
+**MailHog** is available under **http://localhost:8085**
 
-`172.55.0.7 ngrok.dockerlamp`
-
-`172.55.0.9 phpmyadmin.dockerlamp`
-
-
-### Docker Toolbox
-#### Windows
-* Download and extract [Docker Compose LAMP](https://github.com/a-kom/docker-compose-lamp/releases) into your user directory.
-Like `C:\Users\UserName\docker-compose-lamp`.
-* Launch Docker Quickstart Terminal.
-* Go to the [docker-compose-lamp directory](/docs/screenshots/Docker-Quickstart-Terminal-LAMP-directory.jpg): `cd /c/Users/UserName/docker-compose-lamp`.
-* Run `docker-compose up -d`
-* Launch [Kitematic (Alpha)](/docs/screenshots/Kinematic-launch.jpg).
-* Go to the *NGINX* container and press *Settings* [tab](/docs/screenshots/Kinematic-NGINX-check.jpg).
-* Press the Hostname/Ports [subtab](/docs/screenshots/Kinematic-NGINX-Hostname-Ports.jpg).
-* Update the *Published IP:PORT* with your value, e.g. `192.168.99.100:80` and press Save.
-* Navigate to a browser http://192.168.99.100/info.php and check that the NGINX container is available from the [browser](/docs/screenshots/Docker-Compose-LAMP-check-in-browser.jpg).
-* Do the same thing with all other containers that you need to access in a browser. Don't forget, that `80` port is now busy, so
-you can attach other containers to some other ports, like `8080`, `9080`, etc...
-
-You can edit your system host file for accessing some containers via domain name by adding line (or something like this based on your IP and domains, don't forget to change `extra_hosts` in `docker-compose.yml`) like this:
-`192.168.99.100 site.dockerlamp`
 
 ##### Docker Toolbox Known Issues
 * (MariaDB doesn't start) https://github.com/a-kom/docker-compose-lamp/issues/5
@@ -101,7 +223,6 @@ If you want to archive your project on Linux and extract to use on Windows with 
 `docker-compose stop && docker-compose rm -f && docker-compose up --build -d`
 To verify work check that MySQL container run a command:
 `docker-compose ps`.
-
 
 #### MacOS
 Similar to Windows section instruction.
