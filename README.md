@@ -39,10 +39,10 @@ The LAMP stack consists of the following containers:
 | NGROK                     | latest             | ngrok       | [lordius/alpine-ngrok]                       | ✓ |
 | Solr                      | 6-alpine           | solr        | [solr]                                       |   |
 | PhpMyAdmin                | latest             | phpmyadmin  | [phpmyadmin/phpmyadmin]                      | ✓ |
-| Adminer                   | latest             | adminer     | [adminer]                                    |   |
+| Adminer                   | latest             | adminer     | [adminer]                                    | ✓ |
 | MySQL                     | latest             | mysql       | [mysql]                                      | ✓ |
-| PostgreSQL                | postgres:alpine    | postgres    | [postgres]                                   |   |
-| MongoDB                   | latest             | mongo       | [mongo]                                      |   |
+| PostgreSQL                | postgres:alpine    | postgres    | [postgres]                                   | ✓ |
+| MongoDB                   | latest             | mongo       | [mongo]                                      | ✓ |
 | Redis                     | redis:alpine       | redis       | [redis]                                      |   |
 | Memcached                 | memcached:alpine   | memcached   | [memcached]                                  |   |
 | PHP-FPM-DATA              | php-7, php-5       | php-fpm-data| [lordius/alpine-php_fpm]                     |   |
