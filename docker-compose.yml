@@ -139,7 +139,7 @@ services:
             shared:
                 ipv4_address: 172.55.0.6
         ports:
-            - '84:8025'
+            - '85:8025'
 
 # **NGROK** is available under **http://172.55.0.7:4040**
     ngrok:
@@ -150,7 +150,7 @@ services:
             # For this LAMP stack in a virtualbox VM with NAT network...
             ARGS: http 10.0.2.15:81
         ports:
-            - '83:4040'
+            - '84:4040'
         networks:
             shared:
                 ipv4_address: 172.55.0.7
@@ -188,21 +188,23 @@ services:
             shared:
                 ipv4_address: 172.55.0.9
                 
-    # adminer:
-    #     image: adminer
-    #     links:
-    #         - mysql
-    #         - postgres
-    #         - mongo
-    #     depends_on:
-    #         - mysql
-    #         - postgres
-    #         - mongo
-    #     restart: always
-    #     networks:
-    #         internal:
-    #         shared:
-    #             ipv4_address: 172.55.0.10
+     adminer:
+        image: adminer
+        links:
+            - mysql
+            - postgres
+            - mongo
+        depends_on:
+            - mysql
+            - postgres
+            - mongo
+        ports:
+            - '83:8080'
+         restart: always
+         networks:
+             internal:
+             shared:
+                 ipv4_address: 172.55.0.10
 
 ################ Database images.
     mysql:
@@ -219,26 +221,26 @@ services:
         networks:
             - internal
 
-    # postgres:
-    #     image: postgres:alpine
-    #     restart: always
-    #     environment:
-    #         POSTGRES_PASSWORD: testdrive
-    #         POSTGRES_USER: testdrive
-    #         POSTGRES_DB: testdrive
-    #     volumes:
-    #         - ./docker/runtime/postgres/data:/var/lib/postgresql/data
-    #     networks:
-    #         - internal
+    postgres:
+        image: postgres:alpine
+        restart: always
+        environment:
+            POSTGRES_PASSWORD: testdrive
+            POSTGRES_USER: testdrive
+            POSTGRES_DB: testdrive
+        volumes:
+            - ./docker/runtime/postgres/data:/var/lib/postgresql/data
+        networks:
+            - internal
 
-    # mongo:
-    #     image: mongo
-    #     volumes:
-    #         - ./docker/runtime/mongo:/var/lib/mongodb
-    #     restart: always
-    #     command: mongod --smallfiles --logpath=/dev/null # --quiet
-    #     networks:
-    #         - internal
+    mongo:
+        image: mongo
+        volumes:
+            - ./docker/runtime/mongo:/var/lib/mongodb
+        restart: always
+        command: mongod --smallfiles --logpath=/dev/null # --quiet
+        networks:
+            - internal
 
 ################ Cache-memory images.
     # redis:

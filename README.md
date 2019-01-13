@@ -2,10 +2,12 @@
 Based on the Docker images, built to be fast, small and extendable LAMP stack.
 
 I made this lab for my students with a windows 10 family installed in their laptop.
-So, docker can't run on this OS and I want a unified stack for my classroomm...
-That's a possible solution : a Linux VirtualBox VM with docker inside !
+The most powerfull technology is docker to have strictly the same lab for us
+But docker can't run on this OS.
 
-With virtualBox, this lab can run on Linux, MacOS or Windows machines.
+That's possible with this solution : a VirtualBox Linux VM with docker inside !
+
+With virtualBox, this lab can run on Linux and MacOS too.
 
 ## Stack
 * [PHP-FPM](https://github.com/a-kom/alpine-php_fpm)
