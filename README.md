@@ -75,22 +75,22 @@ Install VirtualBox on your machine.
 ### New VM configuration
 * Clic on the « Configuration » icône
 * Clic on the « Network » icône
-** Network accès mode: NAT
-** Clic on the « Advenced »
-** Clic on the « Ports redirection »
-** Clic on the « + »
-** Name: ssh2201
-** Protocol: TCP
-** Host Ip: take empty
-** Host port: 2201
-** Guest Ip: 10.0.2.15
-** Guest port: 22
-** Clic on the « OK »
+  * Network accès mode: NAT
+  * Clic on the « Advenced »
+  * Clic on the « Ports redirection »
+  * Clic on the « + »
+  * Name: ssh2201
+  * Protocol: TCP
+  * Host Ip: take empty
+  * Host port: 2201
+  * Guest Ip: 10.0.2.15
+  * Guest port: 22
+  * Clic on the « OK »
 * Clic on the « Storage » icône 
 * Clic on the storage unity: optic reader (left)
 * Clic on the CD/DVD icône (right)
 * Choice a virtual optical disk file
-** alpine-linux iso you have downloaded
+  * alpine-linux iso you have downloaded
 * Clic the on the « OK » button
 ### Launch tne VM
 * Clic on the « Start » icône 
@@ -158,11 +158,11 @@ Install VirtualBox on your machine.
 ## Port redirection on virtualBox for this VM
 * Clic on the « Configuration » icône
 * Clic on the « Network » icône
-** Network accès mode: NAT
-** Clic on the « Advenced »
-** Clic on the « Ports redirection »
-** Clic on the « + »
-** Put these rules:
+  * Network accès mode: NAT
+  * Clic on the « Advenced »
+  * Clic on the « Ports redirection »
+  * Clic on the « + »
+  * Put these rules:
 
 | Name        | Protocol | Host Ip | Host port | Guest Ip  | Guest port |
 | ----------- | -------- | ------- | --------- | --------- | ---------- |
@@ -174,7 +174,7 @@ Install VirtualBox on your machine.
 | ngrok       | TCP      |         | 8084      | 10.0.2.15 | 84         |
 | mailhog     | TCP      |         | 8085      | 10.0.2.15 | 85         |
 
-** Clic the on the « OK » button
+  * Clic the on the « OK » button
 
 ##  Introduction
 ### Linux
