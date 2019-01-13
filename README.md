@@ -51,8 +51,7 @@ Download [VirtualBox](https://www.virtualbox.org/wiki/Downloads) for your platfo
 Download [Alpine linux standard x86_64](https://https://alpinelinux.org/downloads/).
 ### Windows
 Download [PuTTY](https://www.putty.org)
-### Linux
-### MacOS
+### Linux and MacOS
 Nothing to download
 
 ## Install requirements for VirtualBox solution
@@ -175,17 +174,6 @@ Install VirtualBox on your machine.
 
 ** Clic the on the « OK » button
 
-
-## Requirements
-### Linux
-
-Install [Docker](https://docs.docker.com/engine/installation) and [Docker Compose](https://docs.docker.com/compose/install).
-
-### Windows, MacOS
-#### Docker Toolbox (Recommend)
-
-Install [Docker Toolbox](https://docs.docker.com/toolbox/overview).
-
 ##  Introduction
 ### Linux
 Go to the alpine-linux VM with ssh (user1)
@@ -194,13 +182,6 @@ Enter: cd docker-compose-lamp
 Enter: docker-compose up -d
 
 ### Desktop
-
-| apache      | TCP      |         | 8080      | 10.0.2.15 | 80         |
-| nginx       | TCP      |         | 8081      | 10.0.2.15 | 81         |
-| phpmyadmin  | TCP      |         | 8082      | 10.0.2.15 | 82         |
-| Adminer     | TCP      |         | 8083      | 10.0.2.15 | 83         |
-| ngrok       | TCP      |         | 8084      | 10.0.2.15 | 84         |
-| mailhog     | TCP      |         | 8085      | 10.0.2.15 | 85         |
 
 To view the **PHP** info with the **Apache2 in MPM mode** use the IP: **http://localhost:8080**.
 
