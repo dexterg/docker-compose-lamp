@@ -51,13 +51,14 @@ The LAMP stack consists of the following containers:
 | PHP-FPM-DATA              | php-7, php-5       | php-fpm-data| [lordius/alpine-php_fpm]                     |   |
 | StandaloneFirefoxDebug    | 2.48.2             | selenium    | [selenium/standalone-firefox-debug]          |   |
 
-## Download requirements for VirtualBox solution
-Download [VirtualBox](https://www.virtualbox.org/wiki/Downloads) for your platform.
-Download [Alpine linux standard x86_64](https://https://alpinelinux.org/downloads/).
-### Windows
-Download [PuTTY](https://www.putty.org)
-### Linux and MacOS
-Nothing to download
+## Download requirements
+### VirtualBox
+* [VirtualBox](https://www.virtualbox.org/wiki/Downloads) software for your platform.
+### Virtual Machine
+* [Alpine linux standard x86_64](https://https://alpinelinux.org/downloads/) iso image.
+### ssh client
+* Windows: [PuTTY](https://www.putty.org) a free ssh client.
+* Linux and MacOS: nothing to download !
 
 ## Install requirements for VirtualBox solution
 Install VirtualBox on your machine.
@@ -181,10 +182,10 @@ Install VirtualBox on your machine.
 
 ##  Introduction
 ### Linux
-Go to the alpine-linux VM with ssh (user1)
-Enter: git clone https://github.com/dexterg/docker-compose-lamp.git
-Enter: cd docker-compose-lamp
-Enter: docker-compose up -d
+* Go to the alpine-linux VM with ssh (user1)
+* Enter: git clone https://github.com/dexterg/docker-compose-lamp.git
+* Enter: cd docker-compose-lamp
+* Enter: docker-compose up -d
 
 ### Desktop
 
