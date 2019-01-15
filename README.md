@@ -9,19 +9,22 @@ That's possible with this solution : a VirtualBox Linux VM with docker inside !
 
 With virtualBox, this lab can run on Linux and MacOS too.
 
-## Stack
-* [PHP-FPM](https://github.com/a-kom/alpine-php_fpm)
-* [Apache2 with MPM mode](https://github.com/a-kom/alpine-apache)
+## Stack and documentation
+See READMEs for more details, like environment variables for images:
+* [PHP-FPM alpine](https://github.com/a-kom/alpine-php_fpm)
+* [Apache2 alpine with MPM mode](https://github.com/a-kom/alpine-apache)
 * [NGINX](https://github.com/a-kom/alpine-nginx)
 * [Node.js](https://github.com/nodejs/docker-node)
 * [MailHog](https://github.com/mailhog/MailHog)
-* [NGROK](https://github.com/a-kom/alpine-ngrok)
+* [NGROK alpine](https://github.com/a-kom/alpine-ngrok)
 * [Solr](https://github.com/docker-solr/docker-solr)
 * [PhpMyAdmin](https://github.com/phpmyadmin/docker)
 * [Adminer](https://github.com/TimWolla/docker-adminer)
 * [MySQL](https://github.com/docker-library/mysql)
-* [PostgreSQL](https://github.com/docker-library/postgres)
+* [MariaDB alpine](https://github.com/yobasystems/alpine-mariadb)
+* [PostgreSQL alpine](https://github.com/docker-library/postgres)
 * [MongoDB](https://github.com/docker-library/mongo)
+* [MongoDB alpine](https://hub.docker.com/r/mvertes/alpine-mongo/)
 * [Redis](https://github.com/docker-library/redis)
 * [Memcached](https://github.com/docker-library/memcached)
 * [StandaloneFirefoxDebug](https://github.com/SeleniumHQ/docker-selenium/tree/master/StandaloneFirefoxDebug)
@@ -222,25 +225,6 @@ The custom PHP-FPM image sample is located in the directory - `docker/images/php
 
 For running multiple instances on your local machine, you can update the IP range or ports inside **docker-compose.yml**. For this, on your instance, change IPs to another range, e.g. from `172.55` to `172.54.*`. The same are for ports.
 
-
-## Documentation
-See READMEs for more details, like environment variables for images:
-
-* [PHP-FPM](https://github.com/a-kom/alpine-php_fpm/blob/php-7/README.md)
-* [Apache2 with MPM mode](https://github.com/a-kom/alpine-apache/blob/master/README.md)
-* [NGINX](https://github.com/a-kom/alpine-nginx/blob/master/README.md)
-* [Node.js](https://github.com/nodejs/docker-node)
-* [MailHog](https://github.com/mailhog/MailHog/blob/master/README.md)
-* [NGROK](https://github.com/a-kom/alpine-ngrok/blob/master/README.md)
-* [Solr](https://github.com/docker-solr/docker-solr)
-* [PhpMyAdmin](https://github.com/phpmyadmin/docker)
-* [Adminer](https://github.com/TimWolla/docker-adminer)
-* [MySQL](https://github.com/docker-library/mysql)
-* [PostgreSQL](https://github.com/docker-library/postgres)
-* [MongoDB](https://github.com/docker-library/mongo)
-* [Redis](https://github.com/docker-library/redis)
-* [Memcached](https://github.com/docker-library/memcached)
-* [StandaloneFirefoxDebug](https://github.com/SeleniumHQ/docker-selenium/tree/master/StandaloneFirefoxDebug)
 
 ## License
 

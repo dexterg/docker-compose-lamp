@@ -10,7 +10,7 @@ services:
     # image: lordius/alpine-php_fpm:php-7
     links:
       - mailhog      
-      - mysql      
+      - mariadb      
       - postgres
       - mongo
       # - redis
@@ -18,7 +18,7 @@ services:
       # - solr
     depends_on:
       - mailhog
-      - mysql
+      - mariadb
       - postgres
       - mongo
       # - redis
@@ -170,15 +170,15 @@ services:
   #       ipv4_address: 172.55.0.8
 
 ################ DB managers.
-# Requires mysql container.        
+# Requires mariadb container.        
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     links:
-      - mysql
+      - mariadb
     depends_on:
-      - mysql
+      - mariadb
     environment:
-      PMA_HOST: mysql
+      PMA_HOST: mariadb
       PHP_UPLOAD_MAX_FILESIZE: 1G
       PHP_MAX_INPUT_VARS: 1G
     ports:
@@ -191,14 +191,15 @@ services:
   adminer:
     image: adminer
     links:
-      - mysql
+      - mariadb
       - postgres
       - mongo
     depends_on:
-      - mysql
+      - mariadb
       - postgres
       - mongo
     ports:
+      #- '83:80'
       - '83:8080'
     restart: always
     networks:
@@ -207,8 +208,8 @@ services:
         ipv4_address: 172.55.0.10
 
 ################ Database images.
-  mysql:
-    image: mysql
+  mariadb:
+    image: yobasystems/alpine-mariadb
     # build: docker/images/mysql/.
     volumes:
       - ./docker/runtime/mysql/lib:/var/lib/mysql
@@ -234,9 +235,10 @@ services:
       - internal
 
   mongo:
-    image: mongo
+    image: mvertes/alpine-mongo
     volumes:
       - ./docker/runtime/mongo:/var/lib/mongodb
+      #- ./docker/runtime/mongo:/data/db
     restart: always
     command: mongod --smallfiles --logpath=/dev/null # --quiet
     networks:
