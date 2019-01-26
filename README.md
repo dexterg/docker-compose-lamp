@@ -72,10 +72,8 @@ The LAMP stack consists of the following containers:
   * echo ‘export PATH="$PATH:/opt/netbeans/bin/’ > ~/.bashrc (or ~/.zshrc)
   * source ~/.bashrc (or ~/.zshrc)
 
-
-## Install requirements for VirtualBox solution
-Install VirtualBox on your machine.
-## Launch VirtualBox
+## VirtualBox
+Install and launch VirtualBox on your machine
 ### Create a new VM based on Alpine linux
 * Screen 1
   * Name: alpine2201
@@ -109,7 +107,7 @@ Install VirtualBox on your machine.
 * Choice a virtual optical disk file
   * alpine-linux iso you have downloaded
 * Clic the on the « OK » button
-### Launch tne VM
+### Launch the VM
 * Clic on the « Start » icône 
 ### VM Install for frenchies
 * Localhost login: root (no password) and « enter »
@@ -147,8 +145,29 @@ Install VirtualBox on your machine.
 * Clic on the « OK button »
 * Go back the VM console
 * Enter: reboot and press « return »
+### Port redirection on virtualBox for this VM
+* Clic on the « Configuration » icône
+* Clic on the « Network » icône
+  * Network accès mode: NAT
+  * Clic on the « Advenced »
+  * Clic on the « Ports redirection »
+  * Clic on the « + »
+  * Put these rules:
 
-## docker installation on the alpine VM
+| Name        | Protocol | Host Ip | Host port | Guest Ip  | Guest port |
+| ----------- | -------- | ------- | --------- | --------- | ---------- |
+| ssh         | TCP      |         | 2201      | 10.0.2.15 | 22         |
+| apache      | TCP      |         | 8080      | 10.0.2.15 | 80         |
+| nginx       | TCP      |         | 8081      | 10.0.2.15 | 81         |
+| phpmyadmin  | TCP      |         | 8082      | 10.0.2.15 | 82         |
+| Adminer     | TCP      |         | 8083      | 10.0.2.15 | 83         |
+| ngrok       | TCP      |         | 8084      | 10.0.2.15 | 84         |
+| mailhog     | TCP      |         | 8085      | 10.0.2.15 | 85         |
+
+  * Clic the on the « OK » button
+
+## docker
+docker installation on the alpine VM
 ### Remote handshake on Windows machine (PuTTY)
 * Port: 2201
 * Adresse: 10.0.2.15
@@ -171,34 +190,15 @@ Install VirtualBox on your machine.
 * cd docker-compose-lamp
 * docker-compose up
 
-## Port redirection on virtualBox for this VM
-* Clic on the « Configuration » icône
-* Clic on the « Network » icône
-  * Network accès mode: NAT
-  * Clic on the « Advenced »
-  * Clic on the « Ports redirection »
-  * Clic on the « + »
-  * Put these rules:
-
-| Name        | Protocol | Host Ip | Host port | Guest Ip  | Guest port |
-| ----------- | -------- | ------- | --------- | --------- | ---------- |
-| ssh         | TCP      |         | 2201      | 10.0.2.15 | 22         |
-| apache      | TCP      |         | 8080      | 10.0.2.15 | 80         |
-| nginx       | TCP      |         | 8081      | 10.0.2.15 | 81         |
-| phpmyadmin  | TCP      |         | 8082      | 10.0.2.15 | 82         |
-| Adminer     | TCP      |         | 8083      | 10.0.2.15 | 83         |
-| ngrok       | TCP      |         | 8084      | 10.0.2.15 | 84         |
-| mailhog     | TCP      |         | 8085      | 10.0.2.15 | 85         |
-
-  * Clic the on the « OK » button
-
-## Install lamp stack
+## lamp stack
+Install lamp stack on the Alpine VM
 * Go to the alpine-linux VM with ssh (user1)
 * Enter: git clone https://github.com/dexterg/docker-compose-lamp.git
 * Enter: cd docker-compose-lamp
 * Enter: docker-compose up
 
-## Test lamp stack on desktop
+## Test lamp stack
+Go to your desktop and launch a browser
 
 To view the **PHP** info with the **Apache2 in MPM mode** use the IP: **http://localhost:8080**.
 
