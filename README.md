@@ -59,6 +59,19 @@ The LAMP stack consists of the following containers:
 ### ssh client
 * Windows: [PuTTY](https://www.putty.org) a free ssh client.
 * Linux and MacOS: nothing to download !
+### NetBeans IDE
+* OSX (GUI or CLI)
+  * [NetBeans](https://github.com/carljmosca/netbeans-macos-bundle)
+  * bash -c "$(curl -fsSL https://raw.githubusercontent.com/carljmosca/netbeans-macos-bundle/master/install-custom.sh) »
+* Windows 
+  * [NetBeans](https://netbeans.apache.org/download/nb100/nb100.html)
+* Linux
+  * sudo apt -y install wget unzipwget https://www-us.apache.org/dist/incubator/netbeans/incubating-netbeans/incubating-10.0/incubating-netbeans-10.0-bin.zip
+  * unzip incubating-netbeans-10.0-bin.zip
+  * sudo mv netbeans/ /opt/
+  * echo ‘export PATH="$PATH:/opt/netbeans/bin/’ > ~/.bashrc (or ~/.zshrc)
+  * source ~/.bashrc (or ~/.zshrc)
+
 
 ## Install requirements for VirtualBox solution
 Install VirtualBox on your machine.
@@ -135,15 +148,14 @@ Install VirtualBox on your machine.
 * Go back the VM console
 * Enter: reboot and press « return »
 
-## Remote handshake
-### Windows (PuTTY)
+## docker installation on the alpine VM
+### Remote handshake on Windows machine (PuTTY)
 * Port: 2201
 * Adresse: 10.0.2.15
 * User: user1 (created on alpine2201 VM)
-### Linux and MacOS
+### Remote handshake on Linux and MacOS
 * ssh -p 2201 user1@10.0.2.15
-
-## docker installation on the alpine VM
+### docker installation
 * sudo vi /etc/apk/repositories
 * sudo apk update
 * sudo apk upgrade
@@ -180,14 +192,13 @@ Install VirtualBox on your machine.
 
   * Clic the on the « OK » button
 
-##  Introduction
-### Linux
+## Install lamp stack
 * Go to the alpine-linux VM with ssh (user1)
 * Enter: git clone https://github.com/dexterg/docker-compose-lamp.git
 * Enter: cd docker-compose-lamp
-* Enter: docker-compose up -d
+* Enter: docker-compose up
 
-### Desktop
+## Test lamp stack on desktop
 
 To view the **PHP** info with the **Apache2 in MPM mode** use the IP: **http://localhost:8080**.
 
@@ -200,6 +211,25 @@ To view the **PHP** info with the **NGINX** use the IP: **http://localhost:8081*
 **NGROK** is available under **http://localhost:8084**
 
 **MailHog** is available under **http://localhost:8085**
+
+## Development with NetBeans IDE
+* Launch NetBeans
+* File > New project > PHP > PHP Application from Remote Server
+* Next
+* Project url: http://localhost:8080
+* Remote connexion
+* Manage
+* Name: alpine2201
+* Host Name: localhost
+* Port: 2201
+* Password: *******
+* Private key File: /Users/pascalgautherot/.ssh/id_rsa
+* Known Host File: /Users/pascalgautherot/.ssh/known_hosts
+* Initial Directory: /home/user1/docker-compose-lamp/htdocs
+* OK
+* Upload Directory: /
+* Next
+* Finish
 
 
 ##### Docker Toolbox Known Issues
