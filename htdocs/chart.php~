@@ -1,0 +1,102 @@
+<?php
+  $page="info";
+  include "./header.php";
+  include "./navbar.php";
+
+
+  $labels = array();
+  $datas =array();
+  for ($i=1; $i<=12; $i++) {
+    array_push($labels, date('F', mktime(0, 0, 0, $i, 10))); // March );
+    array_push($datas, rand(10,50));
+  }
+
+  function get_average( array $array_arg) :float {
+    $average = 0;
+    $sum = 0;
+    foreach ($array_arg as $value) {
+      $sum += $value;
+    }
+    return $sum/count($array_arg);
+  }
+  //echo get_average($datas);
+	try {
+		$db_config = array();
+		$db_config['SGBD']	= 'mysql';
+		$db_config['HOST']	= 'localhost';
+		$db_config['DB_NAME']	= 'testdrive';
+		$db_config['USER']	= 'testdrive';
+		$db_config['PASSWORD']	= 'testdrive';
+		$db_config['OPTIONS']	= array(
+			// Activation des exceptions PDO :
+			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+			// Change le fetch mode par défaut sur FETCH_ASSOC ( fetch() retournera un tableau associatif ) :
+			PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+		);
+		$pdo = new PDO($db_config['SGBD'] .':host='. $db_config['HOST'] .';dbname='. $db_config['DB_NAME'],
+					$db_config['USER'],
+					$db_config['PASSWORD'],
+					$db_config['OPTIONS']
+				);
+		unset($db_config);
+	} catch(Exception $e) {
+		trigger_error($e->getMessage(), E_USER_ERROR);
+	}
+
+
+
+
+
+?>
+
+<div class="container" style="padding-bottom: 25px;">
+  <div class="row">
+    <div class="col-lg-12">
+      <canvas id="totalpermonth_chart" ></canvas>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+<script>
+  var ctx = document.getElementById("totalpermonth_chart").getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: [<?php echo '"' . implode($labels, '","') . '"'; ?>],
+      datasets: [{
+        data: [<?php echo implode($datas, ","); ?>],
+        label: "Demandes",
+	backgroundColor: [ 
+          <?php
+            $average = get_average($datas);
+            for ($i=0; $i<12; $i++) { 
+              if ($datas[$i] > $average) { 
+                echo "'rgba(254, 62, 35, 0.3)',"; 
+              } else {
+                echo "'rgba(54, 162, 235, 0.3)',"; 
+              }
+	    }
+          ?> 
+        ],
+        borderColor: [ <?php for ($i=1; $i<=12; $i++) { echo "'rgba(54, 162, 235, 1)',"; } ?> ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero:true
+          }
+        }]
+      }
+    }
+  });
+</script>
+
+
+<?php
+  include "./footer.php";
+?>
