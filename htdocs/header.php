@@ -11,6 +11,7 @@
 
 	<!-- Custom JS file -->
 	<script type="text/javascript" src="js/script.js"></script>
+	<script type="text/javascript" src="js/palette.js"></script>
 
   </head>
   <body>

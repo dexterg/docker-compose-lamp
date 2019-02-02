@@ -13,7 +13,7 @@
     <div class="row">
         <div class="col-md-6">
             <div class="text-right">
-                <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#add_new_record_modal">Add New Record</button>
+                <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#add_new_record_modal">Add new record</button>
             </div>
         </div>
         <div class="col-md-6">
@@ -21,14 +21,18 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <h3>Records:</h3>
+            <h3>Books records:</h3>
             <div class="records_content"></div>
         </div>
         <div class="col-md-6">
-            <h3>Graph:</h3>
-			<div id="chart-container">
-				<canvas id="mycanvas"></canvas>
+            <h3>Books graphic:</h3>
+			<div id="chart-books-container">
+				<canvas id="chart-books-canvas"></canvas>
 			</div>
+            <h3>Categories graphic:</h3>
+						<div id="chart-categories-container">
+							<canvas id="chart-categories-canvas"></canvas>
+						</div>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
         </div>
     </div>
@@ -41,25 +45,28 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Add New Record</h4>
+				<h4 class="modal-title" id="myModalLabel">Add new book</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
             </div>
             <div class="modal-body">
-
                 <div class="form-group">
                     <label for="title">Title</label>
                     <input type="text" id="title" placeholder="Title" class="form-control"/>
                 </div>
-
                 <div class="form-group">
                     <label for="price">Price</label>
                     <input type="text" id="price" placeholder="Price" class="form-control"/>
                 </div>
-
+                <div class="form-group">
+                    <label for="id_category">Category</label>
+					<div class="records_categories_content"></div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" onclick="addRecord()">Add Record</button>
+                <button type="button" class="btn btn-primary" onclick="addRecord()">Add record</button>
             </div>
         </div>
     </div>
@@ -72,21 +79,24 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Update</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Update book</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
             </div>
             <div class="modal-body">
-
                 <div class="form-group">
                     <label for="update_title">Title</label>
                     <input type="text" id="update_title" placeholder="Title" class="form-control"/>
                 </div>
-
                 <div class="form-group">
                     <label for="update_price">Price</label>
                     <input type="text" id="update_price" placeholder="Price" class="form-control"/>
                 </div>
-
+                <div class="form-group">
+                    <label for="update_category">Category</label>
+					<div class="records_categories_content"></div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>

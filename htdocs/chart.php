@@ -20,32 +20,9 @@
 		}
 		return $sum/count($array_arg);
 	}
-	//echo get_average($datas);
+
 	/*
-	try {
-		$db_config = array();
-		$db_config['SGBD']	= 'mysql';
-		$db_config['HOST']	= 'localhost';
-		$db_config['DB_NAME']	= 'testdrive';
-		$db_config['USER']	= 'testdrive';
-		$db_config['PASSWORD']	= 'testdrive';
-		$db_config['OPTIONS']	= array(
-			// Activation des exceptions PDO :
-			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-			// Change le fetch mode par défaut sur FETCH_ASSOC ( fetch() retournera un tableau associatif ) :
-			PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-		);
-		$pdo = new PDO($db_config['SGBD'] .':host='. $db_config['HOST'] .';dbname='. $db_config['DB_NAME'],
-					$db_config['USER'],
-					$db_config['PASSWORD'],
-					$db_config['OPTIONS']
-				);
-		unset($db_config);
-	} catch(Exception $e) {
-		trigger_error($e->getMessage(), E_USER_ERROR);
-	}
-	*/
-	//database
+	// specify your own database credentials
 	define('DB_HOST', 'mariadb');
 	define('DB_USERNAME', 'testdrive');
 	define('DB_PASSWORD', 'testdrive');
@@ -75,7 +52,6 @@
 	if(!$mysqli){
 		die("Connection failed: " . $mysqli->error);
 	}
-
 
 	// Create table books
 	$table = "books";
@@ -164,7 +140,10 @@
 	//close connection
 	$mysqli->close();
 
+	 */
+
 	try {
+		// specify your own database credentials
 		$db_config = array();
 		$db_config['PDO_SGBD']		= 'mysql';
 		$db_config['PDO_HOST']		= 'mariadb';
@@ -186,37 +165,48 @@
 		trigger_error($e->getMessage(), E_USER_ERROR);
 	}
 
+	/*
 	// bindValue
 	$book_title = "Elixir";
 	$book_price = '20,30';
-	$stmt = $pdo->prepare('INSERT INTO books (title, price) VALUES (:book_title, :book_price)');
+	$book_category = '1';
+	$stmt = $pdo->prepare('INSERT INTO books (title, price, id_category) VALUES (:book_title, :book_price, :book_category)');
 	$stmt->bindValue('book_price', $book_price, PDO::PARAM_INT);
 	$stmt->bindValue('book_title', $book_title, PDO::PARAM_STR);
+	$stmt->bindParam('book_category', $book_category, PDO::PARAM_STR);
 	$stmt->execute();
 
 	$book_title = "Phoenix";
 	$book_price = '22,20';
+	$book_category = '1';
 	$stmt->bindValue('book_price', $book_price, PDO::PARAM_INT);
 	$stmt->bindValue('book_title', $book_title, PDO::PARAM_STR);
+	$stmt->bindParam('book_category', $book_category, PDO::PARAM_STR);
 	$stmt->execute();
 
 	// bindParam
 	$book_title = "Ruby";
 	$book_price = '28,60';
-	$stmt = $pdo->prepare('INSERT INTO books (title, price) VALUES (:book_title, :book_price)');
+	$book_category = '1';
+	$stmt = $pdo->prepare('INSERT INTO books (title, price, id_category) VALUES (:book_title, :book_price, :book_category)');
 	$stmt->bindParam('book_price', $book_price, PDO::PARAM_INT);
 	$stmt->bindParam('book_title', $book_title, PDO::PARAM_STR);
+	$stmt->bindParam('book_category', $book_category, PDO::PARAM_STR);
 	$stmt->execute();
 
 	$book_title = "Rails";
-	$book_price = '16,30)';
+	$book_price = '16,30';
+	$book_category = '1';
 	$stmt->execute();
+
+	 */
 
 	try {
 		$stmt = $pdo->prepare('SELECT 
 								id,
 								title,
 								price,
+								id_category,
 								DATE_FORMAT(created_at, "%d %M %Y at %Hh%i") as created_at, 
 								DATE_FORMAT(updated_at, "%d %M %Y at %Hh%i") as updated_at 
 							FROM
@@ -226,17 +216,18 @@
 							LIMIT 0, :offset');
 		//$messages = $stmt->fetchAll(PDO::FETCH_OBJ);
 		//$stmt = $pdo->prepare('SELECT * FROM messages LIMIT 0, :offset');
-		$offset = 4;
+		$offset = 10;
 		$stmt->bindValue('offset', $offset, PDO::PARAM_INT);
 		$stmt->execute();
 		$rows = $stmt->fetchAll(PDO::FETCH_OBJ);
-	} catch(Exception $e) { 
-		exit('<b>Catched exception at line '. $e->getLine() .' :</b> '. $e->getMessage());
-	}
+		$books_number= $stmt->rowCount();
 		foreach($rows as $coll) {
 			$titles_books[] = $coll->title;
 			$prices_books[] = $coll->price;
 		}
+	} catch(Exception $e) { 
+		exit('<b>Catched exception at line '. $e->getLine() .' :</b> '. $e->getMessage());
+	}
 
 ?>	
 
@@ -286,25 +277,29 @@
 </div>
 
 
-
 <div class="container" style="padding-bottom: 25px;">
 	<div class="row">
-		<div class="col-lg-6">
+		<div class="col-lg-1"></div>
+		<div class="col-lg-5">
 			<canvas id="bar_chart" ></canvas>
 		</div>
-		<div class="col-lg-6">
+		<div class="col-lg-5">
 			<canvas id="books_chart" ></canvas>
 		</div>
+		<div class="col-lg-1"></div>
 	</div>
 	<div class="row">
-		<div class="col-lg-6">
+		<div class="col-lg-1"></div>
+		<div class="col-lg-5">
 			<?php echo "<h2 class=\"text-center\">Requests per year</h2>"; ?>
 		</div>
-		<div class="col-lg-6">
+		<div class="col-lg-5">
 			<?php echo "<h2 class=\"text-center\">$books_number books</h2>"; ?>
 		</div>
+		<div class="col-lg-1"></div>
 	</div>
 </div>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <script>

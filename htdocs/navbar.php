@@ -11,6 +11,9 @@
       <li class="nav-item <?php echo ($page == "chart" ? "active" : "") ?>"> 
         <a class="nav-link" href="/chart.php">Chart</a>
       </li>
+      <li class="nav-item <?php echo ($page == "seed" ? "active" : "") ?>"> 
+        <a class="nav-link" href="/seed.php">Seed</a>
+      </li>
       <li class="nav-item <?php echo ($page == "pdochart" ? "active" : "") ?>"> 
         <a class="nav-link" href="/pdochart.php">PDOchart</a>
       </li>

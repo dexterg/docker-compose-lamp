@@ -6,14 +6,14 @@ $object = new CRUD();
 
 // Design initial table header
 
-$categories = $object->Read_categories();
+$categories = $object->Read_for_categories_graph();
  
 $data = array();
 
-foreach ($categories as $category) {
-	$data[] = $category; 
+foreach ($categories as $categorie) {
+	$data[] = $categorie; 
 }
-
+ 
 echo json_encode($data);
  
 ?>

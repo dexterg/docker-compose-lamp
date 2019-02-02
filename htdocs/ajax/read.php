@@ -11,6 +11,7 @@ $data = '<table class="table table-striped table-sm">
 					<th scope="col">#</th>
 					<th scope="col">Title</th>
 					<th scope="col">Price</th>
+					<th scope="col">Category</th>
 					<th scope="col">Update</th>
 					<th scope="col">Delete</th>
 				</tr>
@@ -27,6 +28,7 @@ if (count($books) > 0) {
 					<td>' . $book['id'] . '</td>
 					<td>' . $book['title'] . '</td>
 					<td>' . $book['price'] . '</td>
+					<td>' . $book['category'] . '</td>
 					<td>
 						<button onclick="GetBookDetails(' . $book['id'] . ')" class="btn btn-outline-warning btn-sm">Update</button>
 					</td>
