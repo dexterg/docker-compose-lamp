@@ -126,7 +126,7 @@ function addRecord() {
 	title = title.trim();
 	var price = $("#price").val();
 	price = price.trim();
-	var id_category = $("input[name='id_category']:checked").val();
+	var id_category = $("input[name='category_id']:checked").val();
 	id_category = id_category.trim();
 
 	if (title == "") {

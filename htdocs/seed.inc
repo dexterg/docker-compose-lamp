@@ -28,6 +28,8 @@ class SEED
 			// Create database docker_lamp
 			//$database = "docker_lamp";
 			//$query = sprintf("CREATE DATABASE IF NOT EXISTS $database");
+			$this->CreateTable('categories'); 
+			$this->CreateTable('books'); 
 		} catch(Exception $e) {
 			include "./alert.php";
 		}
