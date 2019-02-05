@@ -122,18 +122,18 @@
 	$query = sprintf("SELECT title, price FROM books ORDER BY id");
 	//execute query
 	$result = $mysqli->query($query);
-	$titles_books = array();
-	$prices_books = array();
+	$books_title = array();
+	$books_price = array();
 	// loop through the returned data with assoc
 	while($row = $result->fetch_assoc()) {
-		$titles_books[] = $row["title"];
-		$prices_books[] = $row["price"];
+		$books_title[] = $row["title"];
+		$books_price[] = $row["price"];
 	}
 
-	$books_number = count($prices_books);
-	//echo "<br>" . json_encode($titles_books);
-	//echo "<br>" . json_encode($prices_books);
-	//echo "<br>" . count($prices_books);
+	$books_count = count($books_price);
+	//echo "<br>" . json_encode($books_title);
+	//echo "<br>" . json_encode($books_price);
+	//echo "<br>" . count($books_price);
 
 	//free memory associated with result
 	$result->close();
@@ -170,67 +170,82 @@
 	$book_title = "Elixir";
 	$book_price = '20,30';
 	$book_category = '1';
-	$stmt = $pdo->prepare('INSERT INTO books (title, price, id_category) VALUES (:book_title, :book_price, :book_category)');
-	$stmt->bindValue('book_price', $book_price, PDO::PARAM_INT);
-	$stmt->bindValue('book_title', $book_title, PDO::PARAM_STR);
-	$stmt->bindParam('book_category', $book_category, PDO::PARAM_STR);
-	$stmt->execute();
+	$query = $pdo->prepare('INSERT INTO books (title, price, id_category) VALUES (:book_title, :book_price, :book_category)');
+	$query->bindValue('book_price', $book_price, PDO::PARAM_INT);
+	$query->bindValue('book_title', $book_title, PDO::PARAM_STR);
+	$query->bindParam('book_category', $book_category, PDO::PARAM_STR);
+	$query->execute();
 
 	$book_title = "Phoenix";
 	$book_price = '22,20';
 	$book_category = '1';
-	$stmt->bindValue('book_price', $book_price, PDO::PARAM_INT);
-	$stmt->bindValue('book_title', $book_title, PDO::PARAM_STR);
-	$stmt->bindParam('book_category', $book_category, PDO::PARAM_STR);
-	$stmt->execute();
+	$query->bindValue('book_price', $book_price, PDO::PARAM_INT);
+	$query->bindValue('book_title', $book_title, PDO::PARAM_STR);
+	$query->bindParam('book_category', $book_category, PDO::PARAM_STR);
+	$query->execute();
 
 	// bindParam
 	$book_title = "Ruby";
 	$book_price = '28,60';
 	$book_category = '1';
-	$stmt = $pdo->prepare('INSERT INTO books (title, price, id_category) VALUES (:book_title, :book_price, :book_category)');
-	$stmt->bindParam('book_price', $book_price, PDO::PARAM_INT);
-	$stmt->bindParam('book_title', $book_title, PDO::PARAM_STR);
-	$stmt->bindParam('book_category', $book_category, PDO::PARAM_STR);
-	$stmt->execute();
+	$query = $pdo->prepare('INSERT INTO books (title, price, id_category) VALUES (:book_title, :book_price, :book_category)');
+	$query->bindParam('book_price', $book_price, PDO::PARAM_INT);
+	$query->bindParam('book_title', $book_title, PDO::PARAM_STR);
+	$query->bindParam('book_category', $book_category, PDO::PARAM_STR);
+	$query->execute();
 
 	$book_title = "Rails";
 	$book_price = '16,30';
 	$book_category = '1';
-	$stmt->execute();
+	$query->execute();
 
 	 */
 
 	try {
-		$stmt = $pdo->prepare('SELECT 
-								id,
-								title,
-								price,
-								id_category,
-								DATE_FORMAT(created_at, "%d %M %Y at %Hh%i") as created_at, 
-								DATE_FORMAT(updated_at, "%d %M %Y at %Hh%i") as updated_at 
-							FROM
-								books
-							ORDER BY
-								id DESC
-							LIMIT 0, :offset');
-		//$messages = $stmt->fetchAll(PDO::FETCH_OBJ);
-		//$stmt = $pdo->prepare('SELECT * FROM messages LIMIT 0, :offset');
+		$query = $pdo->prepare('SELECT 
+									title,
+									price
+								FROM
+									books
+								ORDER BY
+									title ASC
+								LIMIT 0, :offset');
 		$offset = 10;
-		$stmt->bindValue('offset', $offset, PDO::PARAM_INT);
-		$stmt->execute();
-		$rows = $stmt->fetchAll(PDO::FETCH_OBJ);
-		$books_number= $stmt->rowCount();
-		foreach($rows as $coll) {
-			$titles_books[] = $coll->title;
-			$prices_books[] = $coll->price;
+		$query->bindValue('offset', $offset, PDO::PARAM_INT);
+		$query->execute();
+		$rows = $query->fetchAll(PDO::FETCH_OBJ);
+		$books_count= $query->rowCount();
+		foreach($rows as $book) {
+			$books_title[] = $book->title;
+			$books_price[] = $book->price;
+		}
+	} catch(Exception $e) { 
+		exit('<b>Catched exception at line '. $e->getLine() .' :</b> '. $e->getMessage());
+	}
+	
+	try {
+		$query = $pdo->prepare("
+									SELECT c.name, count(c.name) AS total
+									FROM books b
+									LEFT JOIN
+										categories c
+									ON b.id_category = c.id
+									GROUP BY b.id_category
+									");
+		$offset = 10;
+		$query->bindValue('offset', $offset, PDO::PARAM_INT);
+		$query->execute();
+		$rows = $query->fetchAll(PDO::FETCH_OBJ);
+		$categories_count= $query->rowCount();
+		foreach($rows as $category) {
+			$categories_name[] = $category->name;
+			$categories_total[] = $category->total;
 		}
 	} catch(Exception $e) { 
 		exit('<b>Catched exception at line '. $e->getLine() .' :</b> '. $e->getMessage());
 	}
 
-?>	
-
+/*
 <div class="container" style="padding-bottom: 25px;">
 	<div class="row">
 	<div class="col-lg-1"></div>
@@ -275,32 +290,52 @@
 	<div class="col-lg-1"></div>
 	</div>
 </div>
+ */
 
+?>	
+
+
+<div class="container" style="margin-top:30px">
+  <div class="row">
+    <div class="col-sm-1">
+    </div> 
+    <div class="col-sm-10">
+      <div class="jumbotron text-center" style="margin-bottom:0">
+        <h1>Graphics of books and catégories</h1>
+        <span class="badge badge-pill badge-info">chart.js</span>
+        <span class="badge badge-pill badge-info">PHP PDO</span>
+      </div>
+    </div> 
+    <div class="col-sm-1">
+    </div> 
+  </div> 
+</div>
 
 <div class="container" style="padding-bottom: 25px;">
 	<div class="row">
 		<div class="col-lg-1"></div>
-		<div class="col-lg-5">
-			<canvas id="bar_chart" ></canvas>
+		<div class="col-lg-4">
+			<canvas id="categories_chart" ></canvas>
 		</div>
-		<div class="col-lg-5">
+		<div class="col-lg-6">
 			<canvas id="books_chart" ></canvas>
 		</div>
 		<div class="col-lg-1"></div>
 	</div>
 	<div class="row">
 		<div class="col-lg-1"></div>
-		<div class="col-lg-5">
-			<?php echo "<h2 class=\"text-center\">Requests per year</h2>"; ?>
+		<div class="col-lg-4">
+			<?php echo "<h2 class=\"text-center\">$categories_count categories</h2>"; ?>
 		</div>
-		<div class="col-lg-5">
-			<?php echo "<h2 class=\"text-center\">$books_number books</h2>"; ?>
+		<div class="col-lg-6">
+			<?php echo "<h2 class=\"text-center\">$books_count books</h2>"; ?>
 		</div>
 		<div class="col-lg-1"></div>
 	</div>
 </div>
 
-
+<?php
+/*
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <script>
 	var ctx = document.getElementById("bar_chart").getContext('2d');
@@ -338,6 +373,8 @@
 		}
 	});
 </script>
+*/
+?>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <script>
@@ -345,23 +382,71 @@
 	var booksChart = new Chart(ctx, {
 		type: 'bar',
 		data: {
-			labels: <?php echo json_encode($titles_books); ?>,
+			labels: <?php echo json_encode($books_title); ?>,
 			datasets: [{
-				data: <?php echo json_encode($prices_books); ?>,
+				data: <?php echo json_encode($books_price); ?>,
 				label: "Books",
 				backgroundColor: [ 
 					<?php
-						$average = get_average($prices_books);
-						for ($i=0; $i<count($prices_books); $i++) { 
-							if ($prices_books[$i] > $average) { 
+						$books_average = get_average($books_price);
+						for ($i=0; $i<count($books_price); $i++) { 
+							if ($books_price[$i] > $books_average) { 
 								echo "'rgba(254, 62, 35, 0.3)',"; 
 							} else {
-								echo "'rgba(54, 162, 235, 0.3)',"; 
+								echo "'rgba(54, 162, 25, 0.3)',"; 
 							}
 						}
 					?> 
 				],
-				borderColor: [ <?php for ($i=0; $i<count($prices_books); $i++) { echo "'rgba(54, 162, 235, 1)',"; } ?> ],
+				borderColor: [ 
+					<?php 
+						for ($i=0; $i<count($books_price); $i++) { 
+							if ($books_price[$i] > $books_average) { 
+								echo "'rgba(254, 62, 35, 0.5)',"; 
+							} else {
+								echo "'rgba(54, 162, 25, 0.5)',"; 
+							}
+						}
+					?> 
+				],
+				borderWidth: 1
+			}]
+		},
+		options: {
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero:true
+					}
+				}]
+			}
+		}
+	});
+</script>
+
+<script>
+	var ctx = document.getElementById("categories_chart").getContext('2d');
+	var booksChart = new Chart(ctx, {
+		type: 'bar',
+		data: {
+			labels: <?php echo json_encode($categories_name); ?>,
+			datasets: [{
+				data: <?php echo json_encode($categories_total); ?>,
+				label: "Categories count",
+				backgroundColor: [ 
+					<?php
+						for ($i=0; $i<count($categories_name); $i++) { 
+							echo "'rgba(25, 62, 254, 0.3)',"; 
+						}
+					?> 
+				],
+				borderColor: [ 
+					<?php 
+						for ($i=0; $i<count($categories_name); $i++) { 
+							echo "'rgba(25, 25, 245, 1)',"; 
+						} 
+					?> 
+				],
 				borderWidth: 1
 			}]
 		},

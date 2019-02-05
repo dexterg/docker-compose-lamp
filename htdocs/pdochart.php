@@ -7,7 +7,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1>PHP CRUD operations using PDO</h1>
+            <h1>CRUD operations for books</h1>
         </div>
     </div>
     <div class="row">

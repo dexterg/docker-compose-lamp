@@ -29,20 +29,25 @@
 
 ?>	
 
+<div class="container" style="margin-top:30px">
+  <div class="row">
+    <div class="col-sm-12">
+        <h1>Seed books and categories</h1>
+    </div> 
+  </div> 
+</div>
+
 <div class="container" style="padding-bottom: 25px;">
 	<div class="row">
-		<div class="col-lg-1"></div>
-		<div class="col-lg-8">
+		<div class="col-lg-10">
 			<h3>Books</h3>
 		</div>
 		<div class="col-lg-2">
 			<h3>Categories</h3>
 		</div>
-		<div class="col-lg-1"></div>
 	</div>
 	<div class="row">
-		<div class="col-lg-1"></div>
-		<div class="col-lg-8">
+		<div class="col-lg-10">
 			<table class="table table-striped table-sm">
 				<thead>
 					<tr>
@@ -90,7 +95,6 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="col-lg-1"></div>
 	</div>
 </div>
 

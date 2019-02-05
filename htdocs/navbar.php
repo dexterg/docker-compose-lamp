@@ -8,14 +8,14 @@
       <li class="nav-item <?php echo ($page == "home" ? "active" : "") ?>"> 
         <a class="nav-link" href="/home.php">Home</a>
       </li>
-      <li class="nav-item <?php echo ($page == "chart" ? "active" : "") ?>"> 
-        <a class="nav-link" href="/chart.php">Chart</a>
-      </li>
       <li class="nav-item <?php echo ($page == "seed" ? "active" : "") ?>"> 
         <a class="nav-link" href="/seed.php">Seed</a>
       </li>
+      <li class="nav-item <?php echo ($page == "chart" ? "active" : "") ?>"> 
+        <a class="nav-link" href="/chart.php">Chart</a>
+      </li>
       <li class="nav-item <?php echo ($page == "pdochart" ? "active" : "") ?>"> 
-        <a class="nav-link" href="/pdochart.php">PDOchart</a>
+        <a class="nav-link" href="/pdochart.php">CRUD</a>
       </li>
       <li class="nav-item <?php echo ($page == "info" ? "active" : "") ?>"> 
         <a class="nav-link" href="/info.php">Info</a>
