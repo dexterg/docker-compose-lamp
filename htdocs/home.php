@@ -1,7 +1,14 @@
 <?php
-  $page="home";
-  include "./header.php";
-  include "./navbar.php";
+	$page="home";
+	include "./header.php";
+	include "./navbar.php";
+	include "./seed.inc";
+
+	// Connection to database testdrive and
+	// create tables books and categories (if not exists)
+	$seed = new SEED;
+	// Destroy object $seed
+	$seed = null;
 ?>
 
 <div class="container" style="margin-top:30px">
