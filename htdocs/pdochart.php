@@ -16,25 +16,31 @@
                 <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#add_new_record_modal">Add new record</button>
             </div>
         </div>
-        <div class="col-md-6">
-        </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
+		<div class="col-md-8">
             <h3>Books records:</h3>
             <div class="records_content"></div>
         </div>
-        <div class="col-md-6">
-            <h3>Books graphic:</h3>
-			<div id="chart-books-container">
-				<canvas id="chart-books-canvas"></canvas>
+		<div class="col-md-4">
+			<div class="row">
+				<h3>Books graphic:</h3>
 			</div>
-            <h3>Categories graphic:</h3>
-						<div id="chart-categories-container">
-							<canvas id="chart-categories-canvas"></canvas>
-						</div>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-        </div>
+			<div class="row">
+				<div id="chart-books-container">
+					<canvas id="chart-books-canvas"></canvas>
+				</div>
+			</div>
+			<div class="row">
+				<h3>Categories graphic:</h3>
+			</div>
+			<div class="row">
+				<div id="chart-categories-container">
+					<canvas id="chart-categories-canvas"></canvas>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     </div>
 </div>
 <!-- /Content Section -->
