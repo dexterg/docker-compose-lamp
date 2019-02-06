@@ -276,6 +276,15 @@ services:
   #   networks:
   #     shared:
   #       ipv4_address: 172.55.0.11
+  portainer:
+    image: portainer/portainer
+    ports:
+      - '86:9000'
+    networks:
+      - internal
+        #portainer-net
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
 
 networks:
   internal:

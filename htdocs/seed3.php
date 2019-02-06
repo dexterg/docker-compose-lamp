@@ -2,7 +2,7 @@
 	$page="seed";
 	include "./header.php";
 	include "./navbar.php";
-	include "./seed.class";
+	include "./seed.inc";
 
 	// Connection to database testdrive
 	$seed = new SEED;
@@ -111,6 +111,8 @@
 		<div class="col-lg-1"></div>
 	</div>
 </div>
+
+
 
 <?php
   include "./footer.php";

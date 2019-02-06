@@ -301,7 +301,7 @@
     </div> 
     <div class="col-sm-10">
       <div class="jumbotron text-center" style="margin-bottom:0">
-        <h1>Graphics of books and catégories</h1>
+        <h1>Books and catégories graphics</h1>
         <span class="badge badge-pill badge-info">chart.js</span>
         <span class="badge badge-pill badge-info">PHP PDO</span>
       </div>
