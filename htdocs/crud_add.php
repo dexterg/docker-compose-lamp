@@ -46,7 +46,7 @@
             $q = $pdo->prepare($sql);
             $q->execute(array($title, $price, $id_category));
             Database::disconnect();
-            header("Location: crud_index.php");
+            header("Location: crud_index.php?alert='Book inserted'&type='success'");
         }
     }
 ?>

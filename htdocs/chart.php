@@ -210,7 +210,7 @@
 								ORDER BY
 									title ASC
 								LIMIT 0, :offset');
-		$offset = 10;
+		$offset = 100;
 		$query->bindValue('offset', $offset, PDO::PARAM_INT);
 		$query->execute();
 		$rows = $query->fetchAll(PDO::FETCH_OBJ);

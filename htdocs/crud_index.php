@@ -2,6 +2,16 @@
 	$page = __FILE__;
 	include "./header.php";
 	include "./navbar.php";
+	include "./crud_functions.php";
+
+	//var_dump($_GET);
+	//var_dump(isset($_GET["alert"]));
+   	//var_dump(isset($GET["type"]));
+	if (isset($_GET["alert"]) && isset($GET["type"]) ) {
+		var_dump($_GET);
+		alert($_GET['alert'], isset($GET['type']));
+	}
+
 ?>
 	<div class="container">
 		<div class="row">
@@ -18,6 +28,7 @@
 				<th>#</th>
 				<th>Title</th>
 				<th>Price</th>
+				<th>Category</th>
 				<th>Created at</th>
 				<th>Updated at</th>
 				<th>Read</th>
@@ -26,22 +37,35 @@
 			</thead>
 			<tbody>
 				<?php
-				//on inclut notre fichier de connection
+				// Include file connection
 				include './database.php'; 
-				//on se connecte à la base 
+				// Data base conection
 				$pdo = Database::connect();
-				//on formule notre requete
-				$sql = 'SELECT * FROM books ORDER BY id DESC';
+				// Simple query 
+				//$sql = 'SELECT * FROM books ORDER BY id DESC';
+				// Query with join to print the category name 
+				// Last records at the top in table
+				$sql = "SELECT 
+							b.id, b.title, b.price, b.created_at, b.updated_at,
+							c.id AS book_category_id, c.name AS category_name
+						FROM
+							books AS b
+						LEFT JOIN
+							categories c
+						ON b.id_category = c.id
+						ORDER BY
+							b.created_at DESC";
 				foreach ($pdo->query($sql) as $row) {
 					//on cree les lignes du tableau avec chaque valeur retournée
 					echo '<tr>';
 					echo '<td>' . $row['id'] . '</td>';
 					echo '<td>' . $row['title'] . '</td>';
 					echo '<td>' . $row['price'] . '</td>';
+					echo '<td>' . $row['category_name'] . '</td>';
 					echo '<td>' . $row['created_at'] . '</td>';
 						echo '<td>' . $row['updated_at'] . '</td>';
 					echo '<td>';
-						echo '<a class="btn btn-outline-primary btn-sm" href="crud_edit.php?id=' . $row['id'] . '">Read</a>';	// Edit
+						echo '<a class="btn btn-outline-primary btn-sm" href="crud_read.php?id=' . $row['id'] . '">Read</a>';	// Edit
 					echo '</td>';
 					echo '<td>';
 						echo '<a class="btn btn-outline-success btn-sm" href="crud_update.php?id=' . $row['id'] . '">Update</a>';	// Update
