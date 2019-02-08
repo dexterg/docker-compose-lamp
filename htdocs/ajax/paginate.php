@@ -13,9 +13,11 @@
 	$dataPaginate = "<button class=\"btn btn-sm btn-outline-info\" onclick=\"readRecords(0)\"> << </button>&nbsp;";
 	for ($i=0; $i<$booksCount; $i+=5) {
 		if ($limitinf == $i ) {
-			$dataPaginate .= "<button class=\"btn btn-sm btn-outline-success\" onclick=\"readRecords($i)\">$pageset</button>&nbsp;";
+			$disabled = "disabled";
+			$dataPaginate .= "<button class=\"btn btn-sm btn-outline-success\" onclick=\"readRecords($i)\" $disabled>$pageset</button>&nbsp;";
 		} else {
-			$dataPaginate .= "<button class=\"btn btn-sm btn-outline-info\" onclick=\"readRecords($i)\">$pageset</button>&nbsp;";
+			$disabled = "";
+			$dataPaginate .= "<button class=\"btn btn-sm btn-outline-info\" onclick=\"readRecords($i)\" $disabled>$pageset</button>&nbsp;";
 		}
 		$limitsup = $i;
 		$pageset++;
