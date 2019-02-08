@@ -174,9 +174,24 @@ function readCategoriesRecords(id) {
 }
 
 // READ records
-function readRecords() {
-	$.get("ajax/read.php", {}, function (data, status) {
-			$(".records_content").html(data);
+function readRecords(limitinf = 0) {
+	// Construct <table> to print books... 
+	$.post("ajax/read.php", {
+		// Send request to read.php...
+		limitinf: limitinf
+	}, 
+	function (data, status) {
+		// Recept data and modify DOM
+		$(".records_content").html(data);
+	});
+	// Construct paginate bar << 0 5 10 .. >>
+	$.post("ajax/paginate.php", {
+		// Send request to paginate.php...
+		limitinf: limitinf
+	}, 
+	function (data, status) {
+		// Recept data and modify DOM
+		$(".records_paginate").html(data);
 	});
 }
 

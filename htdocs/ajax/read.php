@@ -2,7 +2,11 @@
 
 require 'lib.php';
 
+// To paginate...
+$limitinf = $_POST['limitinf'];
 $object = new CRUD();
+// Get list of books with pagination
+$books = $object->Read($limitinf);
 
 // Design initial table header
 $data = '<table class="table table-striped table-sm">
@@ -18,8 +22,7 @@ $data = '<table class="table table-striped table-sm">
 			</thead>
 			<tbody>';
 
-$books = $object->Read();
- 
+// Table construct
 if (count($books) > 0) {
     $number = 1;
     foreach ($books as $book) {
@@ -39,11 +42,12 @@ if (count($books) > 0) {
         $number++;
     }
 		$data .= '</tbody>';
+
 } else {
     // records not found
-    $data .= '<tr><td colspan="6">Records not found!</td></tr>';
+	$data .= '<tr><td colspan="6">Records not found!</td></tr>';
 }
- 
+	$data .= '</tbody>';
 $data .= '</table>';
  
 echo $data;

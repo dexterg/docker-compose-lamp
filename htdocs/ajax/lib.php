@@ -92,7 +92,20 @@ class CRUD
 	 *
 	 * @return $mixed
 	 * */
-	public function Read()
+	public function getBooksCount($limitinf = 0)
+	{
+		//$query = $this->db->prepare("SELECT * FROM books");
+		$query = $this->db->prepare('SELECT count(id) FROM books');
+		$query->execute();
+		return $query->fetchColumn();
+	}
+
+	/*
+	 * Read all books records
+	 *
+	 * @return $mixed
+	 * */
+	public function Read($limitinf = 0)
 	{
 		//$query = $this->db->prepare("SELECT * FROM books");
 		$query = $this->db->prepare('SELECT 
@@ -109,9 +122,10 @@ class CRUD
 									ON b.id_category = c.id
 									ORDER BY
 										b.id DESC
-									LIMIT 0, :offset');
-		$offset = 10;
+									LIMIT :limitinf, :offset');
+		$offset = 5;
 		$query->bindValue('offset', $offset, PDO::PARAM_INT);
+		$query->bindValue('limitinf', $limitinf, PDO::PARAM_INT);
 		$query->execute();
 		$data = array();
 		while ($row = $query->fetch(PDO::FETCH_ASSOC)) {

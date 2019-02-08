@@ -11,16 +11,23 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-8">
             <div class="text-right">
-                <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#add_new_record_modal">Add new record</button>
+                <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#add_new_record_modal">Add new book</button>
             </div>
         </div>
     </div>
     <div class="row">
 		<div class="col-md-8">
-            <h3>Books records:</h3>
-            <div class="records_content"></div>
+			<h3>Books records:</h3>
+			<div class="records_content"></div>
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col text-center">
+						<div class="records_paginate"></div>
+					</div>
+				</div>
+			</div>
         </div>
 		<div class="col-md-4">
 			<div class="row">
@@ -40,9 +47,12 @@
 				</div>
 			</div>
 		</div>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     </div>
 </div>
+<!--
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+-->
+<script type="text/javascript" src="js/Chart.min.js"></script>	
 <!-- /Content Section -->
 
 <!-- Bootstrap Modals -->

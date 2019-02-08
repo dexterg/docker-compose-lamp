@@ -60,7 +60,7 @@ class SEED
 										id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 										price DECIMAL(5,2) NOT NULL,
 										title VARCHAR(30) NOT NULL,
-										id_category INT(6) NOT NULL,
+										id_category INT(5) NOT NULL,
 										created_at TIMESTAMP DEFAULT NOW(),
 										updated_at TIMESTAMP DEFAULT NOW()
 									)"
