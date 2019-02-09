@@ -281,8 +281,9 @@ services:
     ports:
       - '86:9000'
     networks:
-      - internal
-        #portainer-net
+      internal:
+      shared:
+        ipv4_address: 172.55.0.12
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 

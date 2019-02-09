@@ -42,6 +42,7 @@
       <p><a href="http://localhost:8083">8083 -> adminer</a></p>
       <p><a  href="http://localhost:8084">8084 -> ngrok</a></p>
       <p><a  href="http://localhost:8085">8085 -> mailhog</a></p>
+      <p><a  href="http://localhost:8085">8086 -> portainer</a></p>
       <!--
       <button type="submit" onclick="location.href = '/mail.php';" class="btn btn-primary">Test mail</button>
       -->
