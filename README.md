@@ -28,28 +28,29 @@ See READMEs for more details, like environment variables for images:
 * [Redis](https://github.com/docker-library/redis)
 * [Memcached](https://github.com/docker-library/memcached)
 * [StandaloneFirefoxDebug](https://github.com/SeleniumHQ/docker-selenium/tree/master/StandaloneFirefoxDebug)
-
+* [Portainer](https//github.com/portainer/portainer)
 
 The LAMP stack consists of the following containers:
 
 | Container | Versions | Service name | Image | Enabled by default |
 | --------- | -------- | ------------ | ----- | ------------------ |
-| PHP-FPM                   | php-7, php-5       | php-fpm     | [lordius/alpine-php_fpm]                     | ✓ |
-| Apache                    | latest             | apache2_mpm | [lordius/alpine-apache]                      | ✓ |
-| Nginx                     | latest             | nginx       | [lordius/alpine-nginx]                       | ✓ |
-| Node.js                   | node:alpine        | node        | [node]                                       |   |
-| Mailhog                   | latest             | mailhog     | [mailhog/mailhog]                            | ✓ |
-| NGROK                     | latest             | ngrok       | [lordius/alpine-ngrok]                       | ✓ |
-| Solr                      | 6-alpine           | solr        | [solr]                                       |   |
-| PhpMyAdmin                | latest             | phpmyadmin  | [phpmyadmin/phpmyadmin]                      | ✓ |
-| Adminer                   | latest             | adminer     | [adminer]                                    | ✓ |
-| MySQL                     | latest             | mysql       | [mysql]                                      | ✓ |
-| PostgreSQL                | postgres:alpine    | postgres    | [postgres]                                   | ✓ |
-| MongoDB                   | latest             | mongo       | [mongo]                                      | ✓ |
-| Redis                     | redis:alpine       | redis       | [redis]                                      |   |
-| Memcached                 | memcached:alpine   | memcached   | [memcached]                                  |   |
-| PHP-FPM-DATA              | php-7, php-5       | php-fpm-data| [lordius/alpine-php_fpm]                     |   |
-| StandaloneFirefoxDebug    | 2.48.2             | selenium    | [selenium/standalone-firefox-debug]          |   |
+| PHP-FPM                   | php-7, php-5       | php-fpm     | [lordius/alpine-php_fpm]            | ✓ |
+| Apache                    | latest             | apache2_mpm | [lordius/alpine-apache]             | ✓ |
+| Nginx                     | latest             | nginx       | [lordius/alpine-nginx]              | ✓ |
+| Node.js                   | node:alpine        | node        | [node]                              |   |
+| Mailhog                   | latest             | mailhog     | [mailhog/mailhog]                   | ✓ |
+| NGROK                     | latest             | ngrok       | [lordius/alpine-ngrok]              | ✓ |
+| Solr                      | 6-alpine           | solr        | [solr]                              |   |
+| PhpMyAdmin                | latest             | phpmyadmin  | [phpmyadmin/phpmyadmin]             | ✓ |
+| Adminer                   | latest             | adminer     | [adminer]                           | ✓ |
+| MySQL                     | latest             | mysql       | [mysql]                             | ✓ |
+| PostgreSQL                | postgres:alpine    | postgres    | [postgres]                          | ✓ |
+| MongoDB                   | latest             | mongo       | [mongo]                             | ✓ |
+| Redis                     | redis:alpine       | redis       | [redis]                             |   |
+| Memcached                 | memcached:alpine   | memcached   | [memcached]                         |   |
+| PHP-FPM-DATA              | php-7, php-5       | php-fpm-data| [lordius/alpine-php_fpm]            |   |
+| StandaloneFirefoxDebug    | 2.48.2             | selenium    | [selenium/standalone-firefox-debug] |   |
+| Portainer                 | portainer          | portainer   | [portainer]                         |   |
 
 ## Download requirements
 ### VirtualBox
@@ -74,7 +75,7 @@ The LAMP stack consists of the following containers:
 
 ## VirtualBox
 Install and launch VirtualBox on your machine
-### Create a new VM based on Alpine linux
+### Create a new VM "based on Alpine linux
 * Screen 1
   * Name: alpine2201
   * Type: Linux
@@ -163,6 +164,7 @@ Install and launch VirtualBox on your machine
 | Adminer     | TCP      |         | 8083      | 10.0.2.15 | 83         |
 | ngrok       | TCP      |         | 8084      | 10.0.2.15 | 84         |
 | mailhog     | TCP      |         | 8085      | 10.0.2.15 | 85         |
+| portainer   | TCP      |         | 8086      | 10.0.2.15 | 86         |
 
   * Clic the on the « OK » button
 
